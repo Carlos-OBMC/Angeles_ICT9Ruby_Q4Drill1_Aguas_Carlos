@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q4 Drill 1</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #d3d3c5, #bfbfa8);
+        }
+
+        .card {
+            background-color: #1e1e2f;
+            color: white;
+            border-radius: 25px;
+            padding: 20px;
+        }
+
+        .btn-warning {
+            font-weight: bold;
+        }
+
+        #errorMsg {
+            color: red;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container text-center mt-5">
+        <h1>Electricity Consumption Classifier</h1>
+        <p>Enter your electricity usage in kWh to classify your consumption.</p>
+
+        <div class="card mx-auto mt-4" style="max-width: 600px;">
+            <div class="input-group">
+                <span class="input-group-text">kWh</span>
+                <input type="number" id="kwhInput" class="form-control" placeholder="Input kilowatt per hour">
+                <button class="btn btn-warning" onclick="classifyConsumption()">Consumption Classification</button>
+            </div>
+            <p id="errorMsg" class="mt-2"></p>
+        </div>
+
+        <h2 class="mt-5">Classification Guide</h2>
+        <table class="table table-bordered mt-3">
+            <thead class="table-dark">
+                <tr>
+                    <th>Category</th>
+                    <th>Usage (kWh)</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Lifeline Consumer</td><td>0 – 100</td><td>Discounted electricity rates</td></tr>
+                <tr><td>Low Consumption</td><td>101 – 200</td><td>Normal residential rate</td></tr>
+                <tr><td>Average Consumption</td><td>201 – 300</td><td>Typical electricity usage</td></tr>
+                <tr><td>High Consumption</td><td>301 – 500</td><td>Higher electricity usage</td></tr>
+                <tr><td>Very High Consumption</td><td>Above 500</td><td>Heavy electricity users</td></tr>
+            </tbody>
+        </table>
+
+        <p class="mt-4">
+            Source: <a href="https://www.w3schools.com" target="_blank">w3schools.com</a>
+        </p>
+    </div>
+
+    <script>
+
+        function classifyConsumption() {
+
+            let kwh = document.getElementById("kwhInput").value;
+
+            kwh = Number(kwh);
+
+            let message = "";
+            let errorMsg = document.getElementById("errorMsg");
+
+            errorMsg.innerHTML = "";
+
+            if (kwh < 0 || isNaN(kwh)) {
+                errorMsg.innerHTML = "Please input a non-negative number.";
+                return;
+            }
+
+            if (kwh <= 100) {
+                message = "Lifeline Consumer: Discounted electricity rates.";
+            } 
+            else if (kwh <= 200) {
+                message = "Low Consumption: Normal residential rate.";
+            } 
+            else if (kwh <= 300) {
+                message = "Average Consumption: Typical electricity usage.";
+            } 
+            else if (kwh <= 500) {
+                message = "High Consumption: Higher electricity usage.";
+            } 
+            else {
+                message = "Very High Consumption: Heavy electricity users.";
+            }
+
+            window.alert(message);
+        }
+    </script>
+
+</body>
+</html>
